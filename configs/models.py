@@ -8,7 +8,7 @@ class Config(models.Model):
 
     config = models.TextField(null=False, blank=False)
 
-    date = models.TimeField(auto_now_add=True, null=False, blank=False)
+    created_at = models.DateTimeField(auto_now_add=True, null=False, blank=False)
 
 
     class Meta:
