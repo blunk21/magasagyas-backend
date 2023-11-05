@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create configuration</title>
+</head>
+<body>
+    <h2>Create JSON Object</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.time.label_tag }}
+        {{ form.time }}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
