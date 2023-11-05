@@ -1,4 +1,6 @@
-from django.forms import ModelForm
+from django.forms import ModelForm,Form
+from django import forms
+from datetime import datetime
 
 from .models import Config
 
@@ -16,21 +18,9 @@ def get_initial_config_data_value():
         }
     }
 
-class ConfigurationAdminForm(ModelForm):
-    """Form class for model dynamicconfig.DynamicConfiguration."""
-
-    def __init__(self, *args, **kwargs):
-        """Override init method to set initial value for config_data field."""
-        super().__init__(*args, **kwargs)
-        if not self.initial:
-            self.initial = {}
-        if "config_data" not in self.initial:
-            self.initial["config_data"] = get_initial_config_data_value
-
-    class Meta:
-        """Meta class for DynamicConfigurationAdminForm."""
-
-        model = Config
-        fields = (
-            "config",
-        )
+class ConfigCreationForm(Form):
+    alarm1 = forms.TimeField(widget=forms.TimeInput(attrs={"type":"time"}))
+    alarm2 = forms.TimeField(widget=forms.TimeInput(attrs={"type":"time"}))
+    duration1 = forms.IntegerField(help_text="Duration of irrigation in seconds for alarm1",initial=180,min_value=60)
+    duration2 = forms.IntegerField(help_text="Duration of irrigation in seconds for alarm2",initial=180,min_value=60)
+    data_send_frequency = forms.IntegerField(help_text="Wakeup frequency of the module in seconds",initial=3600,min_value=1200)
