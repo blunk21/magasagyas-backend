@@ -133,6 +133,7 @@ celerybeat.pid
 
 # Environments
 .env
+*.env
 .venv
 env/
 venv/
@@ -175,3 +176,5 @@ cython_debug/
 
 .DS_Store
 # End of https://www.toptal.com/developers/gitignore/api/django
+.python-version
+.DS_Store
