@@ -5,6 +5,11 @@ when you are in your local environment.
 
 import os
 from pathlib import Path
+import environ
+
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -76,11 +81,11 @@ WSGI_APPLICATION = "main.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.environ["PGDATABASE"],
-        "USER": os.environ["PGUSER"],
-        "PASSWORD": os.environ["PGPASSWORD"],
-        "HOST": os.environ["PGHOST"],
-        "PORT": os.environ["PGPORT"],
+        "NAME": env("LOCAL_DATABASE"),
+        "USER": env("LOCAL_USER"),
+        "PASSWORD": env("LOCAL_PASSWORD"),
+        "HOST": env("LOCAL_HOST"),
+        "PORT": env("LOCAL_PORT"),
     }
 }
 
