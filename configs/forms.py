@@ -19,8 +19,10 @@ def get_initial_config_data_value():
     }
 
 class ConfigCreationForm(Form):
-    alarm1 = forms.TimeField(widget=forms.TimeInput(attrs={"type":"time"}))
-    alarm2 = forms.TimeField(widget=forms.TimeInput(attrs={"type":"time"}))
-    duration1 = forms.IntegerField(help_text="Duration of irrigation in seconds for alarm1",initial=180,min_value=60)
-    duration2 = forms.IntegerField(help_text="Duration of irrigation in seconds for alarm2",initial=180,min_value=60)
-    data_send_frequency = forms.IntegerField(help_text="Wakeup frequency of the module in seconds",initial=3600,min_value=1200)
+    alarm1_hour = forms.IntegerField(widget=forms.NumberInput())
+    alarm1_minute = forms.IntegerField(widget=forms.NumberInput())
+    alarm2_hour = forms.IntegerField(widget=forms.NumberInput())
+    alarm2_minute = forms.IntegerField(widget=forms.NumberInput())
+    duration1 = forms.IntegerField(initial=180)
+    duration2 = forms.IntegerField(initial=180)
+    wakeup_frequency = forms.IntegerField(help_text="seconds",initial=3600,min_value=1200)

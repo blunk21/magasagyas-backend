@@ -16,6 +16,7 @@ class ConfigsView(APIView):
         try:
             latest_config = Config.objects.latest("id")
             if latest_config.id > id:
+                latest_config.config["ver"] = latest_config.id 
                 return Response(latest_config.config)
             elif latest_config.id == id:
                 return Response(status=200)
@@ -30,13 +31,13 @@ def create_new_config(request):
         form = ConfigCreationForm(request.POST)
         if form.is_valid():
             config_data = {
-                "alarm1": form.cleaned_data["alarm1"].isoformat(),
-                "alarm2": form.cleaned_data["alarm2"].isoformat(),
-                "duration1": form.cleaned_data["duration1"],
-                "duration": form.cleaned_data["duration2"],
-                "wakeup_freq": form.cleaned_data["wakeup_freq"],
+                "alrm1": [form.cleaned_data["alarm1_hour"], form.cleaned_data["alarm1_minute"]],
+                "alrm2": [form.cleaned_data["alarm2_hour"],form.cleaned_data["alarm2_minute"]],
+                "dur1": form.cleaned_data["duration1"],
+                "dur2": form.cleaned_data["duration2"],
+                "mes_freq": form.cleaned_data["wakeup_frequency"],
             }
-            Config.objects.create(config=json.dumps(config_data))
+            Config.objects.create(config=config_data)
             return redirect("create_new_config")
     else:
         form = ConfigCreationForm()
