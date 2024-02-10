@@ -11,10 +11,10 @@ class ModuleMessageSerializer(serializers.ModelSerializer):
         if ts is None:
             raise serializers.ValidationError({"error": "Module message is missing timestamp"})
         timestamp = datetime.datetime.fromtimestamp(ts)
-        readable_time = f"{timestamp.year}-{timestamp.month}-{timestamp.day} {timestamp.hour}:{timestamp.minute}:{timestamp.second}"
+        formatted_timestamp = timestamp.strftime("%Y.%M.%d - %H:%M:%S")
 
         validated_data = self.initial_data
-        return ModuleMessages.objects.create(data=validated_data,timestamp=readable_time)
+        return ModuleMessages.objects.create(data=validated_data,timestamp=formatted_timestamp)
     
     class Meta:
         model=ModuleMessages
