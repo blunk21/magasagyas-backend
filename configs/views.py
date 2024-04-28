@@ -16,7 +16,7 @@ class ConfigsView(APIView):
         try:
             latest_config = Config.objects.latest("id")
             if latest_config.id > id:
-                latest_config.config["ver"] = latest_config.id 
+                latest_config.config["id"] = latest_config.id 
                 return Response(latest_config.config)
             elif latest_config.id == id:
                 return Response(status=200)
