@@ -6,6 +6,10 @@ when you are in your local environment.
 import os
 from pathlib import Path
 import environ
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 
 env = environ.Env()
